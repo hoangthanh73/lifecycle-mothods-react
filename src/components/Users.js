@@ -1,52 +1,40 @@
-import { Component } from "react";
-import Button from "./Button";
-import User from "./User";
-import ErrorBoundary from "./ErrorBoundary";
+import { Component } from 'react';
 import classes from './Users.module.css';
+import UsersContext from '../store/users-context';
+import Button from './Button';
+import User from './User';
 
 class Users extends Component {
     constructor(props) {
         super(props);
-
-        this.state = { showUsers: true };
+        this.state = { showUsers: false }
     }
 
-    showUsersHandler() {
-        this.setState({ showUsers: true });
-    }
-
-    hideUsersHandler() {
-        this.setState({ showUsers: false });
-    }
+    static contextType = UsersContext;
 
     clickHandler = (e) => {
-        const stateBtn = e.target.innerText;
-
-        if (stateBtn === 'Hide Users') {
-            this.hideUsersHandler();
-            e.target.innerText = 'Show Users';
+        e.preventDefault();
+        if (e.target.textContent === 'Hide Users') {
+            e.target.textContent = 'Show Users';
+            this.setState({ showUsers: true })
         } else {
-            this.showUsersHandler();
-            e.target.innerText = 'Hide Users';
+            e.target.textContent = 'Hide Users';
+            this.setState({ showUsers: false })
         }
     }
 
     render() {
-        const { users } = this.props;
-        const { showUsers } = this.state;
-        const usersList = users.map(user => {
-            return <User key={user.id} user={user}></User>
-        })
+        const { users } = this.context;
 
-
+        const userList = users.map(user => <User key={user.name} name={user.name} />)
         return (
             <div className={classes.users}>
-                <Button onClick={this.clickHandler}>Hide Users</Button>
-                <ErrorBoundary fallback={<p>Something went wrong!</p>}>
-                    {usersList.length >= 1 ? showUsers && (<ul>{usersList}</ul>) : new Error('something went wrong!')}
-                </ErrorBoundary>
+                <ul>
+                    <Button onClick={this.clickHandler}>Hide Users</Button>
+                    {this.state.showUsers && userList}
+                </ul>
             </div>
-        );
+        )
     }
 }
 
