@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import classes from './UserFinder.module.css';
 import Users from './Users';
+import ErrorBoundary from './ErrorBoundary';
 import UsersContext from '../store/users-context';
 
 class UserFinder extends Component {
@@ -33,12 +34,12 @@ class UserFinder extends Component {
 
     render() {
         return (
-            <>
+            <ErrorBoundary>
                 <div className={classes.finder}>
                     <input type="seacrch" onChange={this.searchUserHandler} />
                 </div>
                 <Users filteredUsers={this.state.filteredUsers} />
-            </>
+            </ErrorBoundary>
         )
     }
 }

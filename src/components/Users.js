@@ -5,8 +5,8 @@ import User from './User';
 
 class Users extends Component {
     constructor(props) {
-        super();
-        this.state = { showUsers: false }
+        super(props);
+        this.state = { showUsers: true }
     }
 
     toggleUserHandler = (event) => {
@@ -17,14 +17,14 @@ class Users extends Component {
     }
 
     render() {
-        const { users } = this.props;
+        const users = this.props.filteredUsers;
         const userList = users.map(user => <User key={user.name} name={user.name} />)
         return (
             <div className={classes.users}>
+                <Button onClick={this.toggleUserHandler}>
+                    {this.state.showUsers ? 'Hide Users' : 'Show Users'}
+                </Button>
                 <ul>
-                    <Button onClick={this.toggleUserHandler}>
-                        {this.state.showUsers ? 'Hide Users' : 'Show Users'}
-                    </Button>
                     {this.state.showUsers && userList}
                 </ul>
             </div>
