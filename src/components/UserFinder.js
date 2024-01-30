@@ -12,6 +12,7 @@ class UserFinder extends Component {
             searchTerm: ''
         })
     }
+
     static contextType = UsersContext;
 
     componentDidMount() {
@@ -34,12 +35,14 @@ class UserFinder extends Component {
 
     render() {
         return (
-            <ErrorBoundary>
+            <>
                 <div className={classes.finder}>
                     <input type="seacrch" onChange={this.searchUserHandler} />
                 </div>
-                <Users filteredUsers={this.state.filteredUsers} />
-            </ErrorBoundary>
+                <ErrorBoundary>
+                    <Users filteredUsers={this.state.filteredUsers} />
+                </ErrorBoundary>
+            </>
         )
     }
 }

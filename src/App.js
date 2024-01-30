@@ -9,10 +9,14 @@ const DUMMY_USERS = [
   { id: 'u3', name: 'Julie' },
 ]
 
+const value = {
+  users: DUMMY_USERS,
+}
+
 class App extends Component {
   render() {
     return (
-      <UsersContext.Provider value={{ users: DUMMY_USERS }}>
+      <UsersContext.Provider value={value}>
         <UserFinder />
       </UsersContext.Provider>
     );
