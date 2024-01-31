@@ -11,6 +11,7 @@ const DUMMY_USERS = [
 
 const value = {
   users: DUMMY_USERS,
+  searchTerm: '',
 }
 
 class App extends Component {

@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import classes from './UserFinder.module.css';
 import Users from './Users';
-import ErrorBoundary from './ErrorBoundary';
 import UsersContext from '../store/users-context';
+import ErrorBoundary from './ErrorBoundary';
 
 class UserFinder extends Component {
     constructor() {

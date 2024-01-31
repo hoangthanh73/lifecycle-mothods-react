@@ -19,9 +19,14 @@ class Users extends Component {
         })
     }
 
+    componentDidUpdate() {
+        if (this.props.filteredUsers.length < 1) {
+            throw new Error('Something went wrong.');
+        }
+    }
+
     render() {
-        const users = this.props.filteredUsers;
-        const userList = users.map(user => <User key={user.name} name={user.name} />)
+        const userList = this.props.filteredUsers.map(user => <User key={user.name} name={user.name} />)
 
         return (
             <div className={classes.users}>
